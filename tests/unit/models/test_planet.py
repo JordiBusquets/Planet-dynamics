@@ -109,7 +109,7 @@ class TestPlanetFunctions(unittest.TestCase):
             Planet("P1", x=1.0, y=2.0, z=3.0),
             Planet("P2", x=4.0, y=5.0, z=6.0),
         ]
-        x, y, z = [[]], [[]]
+        x, y, z = [[]], [[]], [[]]
         set_up_positions(x, y, z, 2)
         
         append_positions(x, y, z, planets)

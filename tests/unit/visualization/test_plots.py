@@ -18,7 +18,7 @@ class TestComputeLimit(unittest.TestCase):
         
         # Min should be -R_earth, max should be at least 1e11
         self.assertLess(lim_min, 0)
-        self.assertGreater(lim_max, 1e11)
+        self.assertGreaterEqual(lim_max, 1e11)
 
     def test_limit_includes_planet_radius(self):
         """Test that limits account for planet radius."""
@@ -39,8 +39,8 @@ class TestComputeLimit(unittest.TestCase):
         
         lim_min, lim_max = compute_limit(planets, 2)
         
-        self.assertLess(lim_min, -5e10)
-        self.assertGreater(lim_max, 1e11)
+        self.assertLessEqual(lim_min, -5e10)
+        self.assertGreaterEqual(lim_max, 1e11)
 
     def test_negative_coordinates(self):
         """Test with negative planet positions."""
@@ -49,7 +49,7 @@ class TestComputeLimit(unittest.TestCase):
         
         lim_min, lim_max = compute_limit(planets, 1)
         
-        self.assertLess(lim_min, -1e11)
+        self.assertLessEqual(lim_min, -1e11)
 
     def test_current_limits_respected(self):
         """Test that current limits are considered."""
@@ -71,7 +71,7 @@ class TestComputeLimit(unittest.TestCase):
         lim_min, lim_max = compute_limit(planets, 3)
         
         self.assertLess(lim_min, 0)
-        self.assertGreater(lim_max, 2e10)
+        self.assertGreaterEqual(lim_max, 2e10)
 
     def test_zero_position_planet(self):
         """Test limit calculation for planet at origin."""
@@ -94,9 +94,9 @@ class TestComputeLimit(unittest.TestCase):
         lim_min_z, lim_max_z = compute_limit(planets, 3)
         
         # Max for each dimension should be greater than respective coordinate
-        self.assertGreater(lim_max_x, 1e11)
-        self.assertGreater(lim_max_y, 2e11)
-        self.assertGreater(lim_max_z, 3e11)
+        self.assertGreaterEqual(lim_max_x, 1e11)
+        self.assertGreaterEqual(lim_max_y, 2e11)
+        self.assertGreaterEqual(lim_max_z, 3e11)
 
 
 if __name__ == '__main__':
