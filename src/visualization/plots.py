@@ -44,7 +44,7 @@ def set_up_plot(lines, x, y, z, planets):
     fig.add_subplot(1, 1, 1, projection='3d')
     plt.ion()
     plt.show()
-    axes = plt.gca(projection='3d')
+    axes = plt.gca()
     axes.set_xlim(lim_x_min, lim_x_plus)
     axes.set_ylim(lim_y_min, lim_y_plus)
     axes.set_zlim(lim_z_min, lim_z_plus)
@@ -71,7 +71,7 @@ def update_plot(lines, x, y, z, planets, t):
         lines[i].set_3d_properties(z[i])
         i += 1
 
-    axes = plt.gca(projection='3d')
+    axes = plt.gca()
     current_lim_x = axes.get_xlim()  # returns 2-tuple
     current_lim_y = axes.get_ylim()  # returns 2-tuple
     current_lim_z = axes.get_zlim()  # returns 2-tuple
