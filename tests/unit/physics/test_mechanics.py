@@ -107,8 +107,8 @@ class TestComputeAccelerations(unittest.TestCase):
 
     def test_newtons_third_law_system_two_planets(self):
         """Test Newton's third law in multi-body system."""
-        p1 = Planet("P1", mass=1e24, x=0.0, y=0.0, z=0.0, x_v=1.0, y_v=2.0, z_v=3.0)
-        p2 = Planet("P2", mass=1e24, x=1e7, y=0.0, z=0.0, x_v=-4.0, y_v=-5.0, z_v=-6.0)
+        p1 = Planet("P1", mass=1e10, x=0.0, y=0.0, z=0.0, x_v=1.0, y_v=2.0, z_v=3.0)
+        p2 = Planet("P2", mass=1e10, x=1.0, y=0.0, z=0.0, x_v=-4.0, y_v=-5.0, z_v=-6.0)
         planets = [p1, p2]
         
         compute_accelerations(planets)
@@ -125,22 +125,33 @@ class TestComputeAccelerations(unittest.TestCase):
         self.assertAlmostEqual(p2.z_a, 0.0, places=5)
 
         for p in planets:
-            p.update_velocity(1.0)  # Update velocity for 1 second
+            p.update_velocity(2.0)  # Update velocity for 1 second
 
         # Given the initial velocities, accelerations should
         # cause a change in velocity in the x direction for both planets
-        self.assertAlmostEqual(p1.x_v, 1.0 + 0.816963, places=5)
-        self.assertAlmostEqual(p2.x_v, -4.0 - 0.816963, places=5)
+        self.assertAlmostEqual(p1.x_v, 1.0 + 2.0 * 0.816963, places=5)
+        self.assertAlmostEqual(p2.x_v, -4.0 - 2.0 * 0.816963, places=5)
         self.assertAlmostEqual(p1.y_v, 2.0, places=5)
         self.assertAlmostEqual(p2.y_v, -5.0, places=5)
         self.assertAlmostEqual(p1.z_v, 3.0, places=5)
         self.assertAlmostEqual(p2.z_v, -6.0, places=5)
 
+        for p in planets:
+            p.update_position(3.0)  # Update velocity for 1 second
+
+        # Check that after 1 second, the planets have moved in the expected direction
+        self.assertAlmostEqual(p1.x, 0.0 + 3.0 * (1.0 + 2.0 * 0.816963), places=4)
+        self.assertAlmostEqual(p2.x, 1.0 + 3.0 * (-4.0 - 2.0 * 0.816963), places=4)
+        self.assertAlmostEqual(p1.y, 0.0 + 3.0 * 2.0, places=5)
+        self.assertAlmostEqual(p2.y, 0.0 - 3.0 * 5.0, places=5)
+        self.assertAlmostEqual(p1.z, 0.0 + 3.0 * 3.0, places=5)
+        self.assertAlmostEqual(p2.z, 0.0 - 3.0 * 6.0, places=5)
+
     def test_newtons_third_law_system_three_planets(self):
         """Test Newton's third law in multi-body system."""
-        p1 = Planet("P1", mass=1e24, x=0.0, y=0.0, z=0.0, x_v=1.0, y_v=2.0, z_v=3.0)
-        p2 = Planet("P2", mass=1e24, x=1e7, y=0.0, z=0.0, x_v=-4.0, y_v=-5.0, z_v=-6.0)
-        p3 = Planet("P3", mass=1e24, x=0.5e7, y=1e7, z=0.0, x_v=7.0, y_v=8.0, z_v=9.0)
+        p1 = Planet("P1", mass=1e10, x=0.0, y=0.0, z=0.0, x_v=1.0, y_v=2.0, z_v=3.0)
+        p2 = Planet("P2", mass=1e10, x=1.0, y=0.0, z=0.0, x_v=-4.0, y_v=-5.0, z_v=-6.0)
+        p3 = Planet("P3", mass=1e10, x=0.5, y=1.0, z=0.0, x_v=7.0, y_v=8.0, z_v=9.0)
         planets = [p1, p2, p3]
         
         compute_accelerations(planets)
@@ -167,18 +178,35 @@ class TestComputeAccelerations(unittest.TestCase):
         self.assertAlmostEqual(p3.z_a, 0.0, places=5)
 
         for p in planets:
-            p.update_velocity(1.0)  # Update velocity for 1 second
+            p.update_velocity(2.0)  # Update velocity for 1 second
 
         # Given the initial velocities, accelerations should
         # cause a change in velocity in the x direction for both planets
-        self.assertAlmostEqual(p1.x_v, 1.0+1.143749, places=5)
-        self.assertAlmostEqual(p2.x_v, -4.0-1.143749, places=5)
+        self.assertAlmostEqual(p1.x_v, 1.0 + 2.0 * 1.143749, places=5)
+        self.assertAlmostEqual(p2.x_v, -4.0 - 2.0 * 1.143749, places=5)
         self.assertAlmostEqual(p3.x_v, 7.0, places=5)
 
-        self.assertAlmostEqual(p1.y_v, 2.0+0.6535711, places=5)
-        self.assertAlmostEqual(p2.y_v, -5.0+0.65357, places=5)
-        self.assertAlmostEqual(p3.y_v, 8.0-1.307142, places=5)
+        self.assertAlmostEqual(p1.y_v, 2.0 + 2.0 * 0.6535711, places=5)
+        self.assertAlmostEqual(p2.y_v, -5.0 + 2.0 * 0.65357, places=5)
+        self.assertAlmostEqual(p3.y_v, 8.0 - 2.0 * 1.307142, places=5)
         
         self.assertAlmostEqual(p1.z_v, 3.0, places=5)
         self.assertAlmostEqual(p2.z_v, -6.0, places=5)
         self.assertAlmostEqual(p3.z_v, 9.0, places=5)
+
+        for p in planets:
+            p.update_position(3.0)  # Update velocity for 1 second
+
+
+        # Check that after 1 second, the planets have moved in the expected direction
+        self.assertAlmostEqual(p1.x, 0.0 + 3.0 * (1.0 + 2.0 * 1.143749), places=4)
+        self.assertAlmostEqual(p2.x, 1.0 + 3.0 * (-4.0 - 2.0 * 1.143749), places=4)
+        self.assertAlmostEqual(p3.x, 0.5 + 3.0 * 7.0, places=5)
+
+        self.assertAlmostEqual(p1.y, 0.0 + 3.0 * (2.0 + 2.0 * 0.6535711), places=4)
+        self.assertAlmostEqual(p2.y, 0.0 + 3.0 * (-5.0 + 2.0 * 0.65357), places=4)
+        self.assertAlmostEqual(p3.y, 1.0 + 3.0 * (8.0 - 2.0 * 1.307142), places=4)
+
+        self.assertAlmostEqual(p1.z, 0.0 + 3.0 * 3.0, places=5)
+        self.assertAlmostEqual(p2.z, 0.0 - 3.0 * 6.0, places=5)
+        self.assertAlmostEqual(p3.z, 0.0 + 3.0 * 9.0, places=5)
