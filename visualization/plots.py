@@ -1,3 +1,4 @@
+"""Visualization tools for planet dynamics simulation."""
 import time
 import matplotlib.pyplot as plt
 from constants import R_earth
@@ -6,6 +7,7 @@ colors = ['g-', 'r-', 'b-', 'y-', 'g-', 'b-']
 
 
 def compute_limit(planets, dim, current_lim_min=0.0, current_lim_plus=0.0):
+    """Compute axis limits based on planet positions."""
     n = len(planets)
     i = 0
     lim_plus = current_lim_plus
@@ -32,6 +34,7 @@ def compute_limit(planets, dim, current_lim_min=0.0, current_lim_plus=0.0):
 
 
 def set_up_plot(lines, x, y, z, planets):
+    """Initialize the 3D plot for planet trajectories."""
     n = len(planets)
     lim_x_min, lim_x_plus = compute_limit(planets, 1)
     lim_y_min, lim_y_plus = compute_limit(planets, 2)
@@ -59,6 +62,7 @@ def set_up_plot(lines, x, y, z, planets):
 
 
 def update_plot(lines, x, y, z, planets, t):
+    """Update the plot with new planet positions."""
     n = len(lines)
     i = 0
     while i < len(planets):

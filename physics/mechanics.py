@@ -1,26 +1,32 @@
-from planet import planet, distance_between_planets, static_earth
+"""Physics calculations for planet dynamics."""
 from typing import List
 from constants import G
+from models import Planet, distance_between_planets, static_earth
 
 
-def gravitational_force(p1, p2):
+def gravitational_force(p1, p2) -> float:
+    """Calculate the gravitational force between two planets."""
     d = distance_between_planets(p1, p2)
     f = G * p1.mass * p2.mass / (d * d)
     return f
 
 
-def gravitational_acceleration(f, p):
+def gravitational_acceleration(f, p) -> float:
+    """Calculate the gravitational acceleration from a force."""
     return (f / p.mass) ** 0.5
 
 
-def compute_accelerations(planets: List[planet]):
+def compute_accelerations(planets: List[Planet]):
+    """Compute gravitational accelerations for all planets due to mutual forces."""
     n = len(planets)
 
+    # Clear existing accelerations
     i = 0
     while i < n:
         planets[i].clear_acceleration()
         i += 1
 
+    # Compute pairwise gravitational interactions
     i_lhs = 0
     while i_lhs < n - 1:
         p_lhs = planets[i_lhs]
@@ -41,7 +47,8 @@ def compute_accelerations(planets: List[planet]):
     return 0
 
 
-def stable_circular_orbit_earth(p, x):
+def stable_circular_orbit_earth(p, x) -> 'Planet':
+    """Calculate velocity for a stable circular orbit."""
     earth = static_earth("earth")
     earth.x = x
     f = gravitational_force(p, earth)
