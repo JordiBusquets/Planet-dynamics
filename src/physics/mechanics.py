@@ -1,7 +1,7 @@
 """Physics calculations for planet dynamics."""
 from typing import List
-from .constants import G
-from .models import Planet, distance_between_planets, static_earth
+from src.constants import G
+from src.models import Planet, distance_between_planets, static_earth
 
 
 def gravitational_force(p1, p2) -> float:

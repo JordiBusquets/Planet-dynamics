@@ -182,6 +182,76 @@ The simulator produces 3D trajectory plots showing:
 
 The plot updates in real-time during simulation with current time displayed.
 
+## Testing
+
+The project includes comprehensive unit and functional tests for all major components. Tests are organized into:
+- **Unit Tests** (`tests/unit/`) - Test individual classes and functions
+- **Functional Tests** (`tests/functional/`) - Integration and end-to-end tests
+
+### Installation
+
+Install pytest and related tools:
+
+```bash
+pip install pytest pytest-cov
+```
+
+### Running Tests
+
+#### Using pytest (recommended):
+
+```bash
+# Run all tests
+pytest
+
+# Run only unit tests
+pytest tests/unit/
+
+# Run only functional tests
+pytest tests/functional/
+
+# Run specific test file
+pytest tests/unit/test_constants.py
+
+# Run with verbose output
+pytest -v
+
+# Run with coverage report
+pytest --cov=src tests/
+
+# Run with detailed coverage report
+pytest --cov=src --cov-report=html tests/
+```
+
+#### Using unittest directly:
+
+```bash
+# Run all tests
+python3 -m unittest discover tests
+
+# Run specific test module
+python3 -m unittest tests.unit.test_constants
+
+# Run with verbose output
+python3 -m unittest discover tests -v
+```
+
+### Test Structure
+
+```
+tests/
+├── unit/                      # Unit tests
+│   ├── test_constants.py      # Tests for physical constants
+│   ├── models/
+│   │   └── test_planet.py     # Tests for Planet class
+│   ├── physics/
+│   │   └── test_mechanics.py  # Tests for physics calculations
+│   └── visualization/
+│       └── test_plots.py      # Tests for plotting functions
+└── functional/                # Functional/integration tests
+    └── test_main.py           # Tests for main simulation function
+```
+
 ## Limitations & Improvements
 
 - **Euler Integration** - Forward Euler method has limited stability. Consider RK4 for higher accuracy
