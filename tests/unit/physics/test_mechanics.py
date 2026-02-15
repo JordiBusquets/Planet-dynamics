@@ -125,7 +125,7 @@ class TestComputeAccelerations(unittest.TestCase):
         self.assertAlmostEqual(p2.z_a, 0.0, places=5)
 
         for p in planets:
-            p.update_velocity(2.0)  # Update velocity for 1 second
+            p.update_velocity(2.0)  # Update velocity for 2 seconds
 
         # Given the initial velocities, accelerations should
         # cause a change in velocity in the x direction for both planets
@@ -137,7 +137,7 @@ class TestComputeAccelerations(unittest.TestCase):
         self.assertAlmostEqual(p2.z_v, -6.0, places=5)
 
         for p in planets:
-            p.update_position(3.0)  # Update velocity for 1 second
+            p.update_position(3.0)  # Update velocity for 3 seconds
 
         # Check that after 1 second, the planets have moved in the expected direction
         self.assertAlmostEqual(p1.x, 0.0 + 3.0 * (1.0 + 2.0 * 0.816963), places=4)
@@ -178,7 +178,7 @@ class TestComputeAccelerations(unittest.TestCase):
         self.assertAlmostEqual(p3.z_a, 0.0, places=5)
 
         for p in planets:
-            p.update_velocity(2.0)  # Update velocity for 1 second
+            p.update_velocity(2.0)  # Update velocity for 2 seconds
 
         # Given the initial velocities, accelerations should
         # cause a change in velocity in the x direction for both planets
@@ -195,7 +195,7 @@ class TestComputeAccelerations(unittest.TestCase):
         self.assertAlmostEqual(p3.z_v, 9.0, places=5)
 
         for p in planets:
-            p.update_position(3.0)  # Update velocity for 1 second
+            p.update_position(3.0)  # Update velocity for 3 seconds
 
 
         # Check that after 1 second, the planets have moved in the expected direction
