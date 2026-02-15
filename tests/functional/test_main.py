@@ -5,7 +5,7 @@ import pytest
 
 from src.main import planet_dynamics
 from src.constants import M_earth, R_sun, D_earth_sun, V_earth
-from src.models import Planet, static_sun
+from src.models.planet import Planet, static_sun
 
 
 @pytest.fixture

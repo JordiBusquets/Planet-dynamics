@@ -189,6 +189,16 @@ def static_sun(name):
                   0.0, 0.0, 0.0)  # velocity
 
 
+def real_earth(name):
+    """Create a realistic Earth planet, at the current Sun-Earth distance,
+    with realistic current tangential velocity."""
+    return Planet(name, 
+                  R_earth, # radius 
+                  M_earth, # mass
+                  D_earth_sun, 0.0, 0.0, # position 
+                  0.0, V_earth, 0.0) # velocity
+
+
 def random_earth(name):
     """Create an earth with random position and velocity."""
     return Planet(name,

@@ -1,8 +1,8 @@
 """Unit tests for visualization module."""
 import unittest
 from unittest.mock import patch, MagicMock
-from src.visualization import compute_limit
-from src.models import Planet
+from src.visualization.plots import compute_limit
+from src.models.planet import Planet
 from src.constants import R_earth
 
 

@@ -1,6 +1,7 @@
 """Visualization tools for planet dynamics simulation."""
 import time
 import matplotlib.pyplot as plt
+from IPython.display import display
 from src.constants import R_earth
 
 colors = ['g-', 'r-', 'b-', 'y-', 'g-', 'b-']
@@ -40,11 +41,8 @@ def set_up_plot(lines, x, y, z, planets):
     lim_y_min, lim_y_plus = compute_limit(planets, 2)
     lim_z_min, lim_z_plus = compute_limit(planets, 3)
 
-    fig = plt.figure()
-    fig.add_subplot(1, 1, 1, projection='3d')
-    plt.ion()
-    plt.show()
-    axes = plt.gca()
+    fig = plt.figure(figsize=(12, 9))
+    axes = fig.add_subplot(1, 1, 1, projection='3d')
     axes.set_xlim(lim_x_min, lim_x_plus)
     axes.set_ylim(lim_y_min, lim_y_plus)
     axes.set_zlim(lim_z_min, lim_z_plus)
@@ -59,6 +57,13 @@ def set_up_plot(lines, x, y, z, planets):
         line, = axes.plot(x[i], y[i], z[i], colors[i])
         lines.append(line)
         i += 1
+    
+    # Store figure and axes as attributes to use in update_plot
+    set_up_plot.fig = fig
+    set_up_plot.axes = axes
+    
+    # Create a single display handle that will be updated throughout
+    set_up_plot.display_handle = display(fig, display_id=True)
 
 
 def update_plot(lines, x, y, z, planets, t):
@@ -71,7 +76,7 @@ def update_plot(lines, x, y, z, planets, t):
         lines[i].set_3d_properties(z[i])
         i += 1
 
-    axes = plt.gca()
+    axes = set_up_plot.axes
     current_lim_x = axes.get_xlim()  # returns 2-tuple
     current_lim_y = axes.get_ylim()  # returns 2-tuple
     current_lim_z = axes.get_zlim()  # returns 2-tuple
@@ -83,8 +88,9 @@ def update_plot(lines, x, y, z, planets, t):
     axes.set_zlim(lim_z_min, lim_z_plus)
 
     new_title = "T=" + str("%.2f" % t) + " years"
-    plt.title(new_title)
+    axes.set_title(new_title)
 
-    plt.draw()
-    plt.pause(1e-17)
-    time.sleep(0.001)
+    set_up_plot.fig.canvas.draw()
+    # Update the display in notebook
+    if hasattr(set_up_plot, 'display_handle'):
+        set_up_plot.display_handle.update(set_up_plot.fig)
