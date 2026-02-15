@@ -60,8 +60,5 @@ def planet_dynamics(planets: list[Planet], time_horizon:float, time_step:float, 
         # planets = check_for_colliding_planets(planets)
 
         total_time += time_step * DAYS_TO_YEARS  # in years
-
-    if make_plot:
-        plt.show()
     
     return x, y, z
