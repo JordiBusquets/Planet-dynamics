@@ -91,8 +91,6 @@ def update_plot(lines, x, y, z, planets, t):
     axes.set_title(new_title)
 
     set_up_plot.fig.canvas.draw()
-    # Update the display
+    # Update the display in notebook
     if hasattr(set_up_plot, 'display_handle'):
         set_up_plot.display_handle.update(set_up_plot.fig)
-    #time.sleep(0.05)
-    #time.sleep(0.001)

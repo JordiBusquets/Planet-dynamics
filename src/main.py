@@ -13,7 +13,7 @@ DAYS_TO_SEC = 24.0 * 60.0 * 60.0
 DAYS_TO_YEARS = 1.0 / 365.25
 DAYS_TO_SECONDS = 24.0 * 60.0 * 60.0
 
-def planet_dynamics(planets: list[Planet], time_horizon:float, time_step:float, make_plot: bool=True):
+def planet_dynamics(planets: list[Planet], time_horizon:float, time_step:float, make_plot: bool=True, plot_update_freq: int=10):
     """
     Simulate planet dynamics over a given time horizon.
     
@@ -22,6 +22,7 @@ def planet_dynamics(planets: list[Planet], time_horizon:float, time_step:float, 
         time_horizon: Simulation time horizon in years
         step: Time step in days
         make_plot: Whether to display the 3D trajectory plot
+        plot_update_freq: Update plot every N timesteps (default: 10)
         
     Returns:
         Tuple of (x, y, z) position lists for all planets
@@ -36,15 +37,12 @@ def planet_dynamics(planets: list[Planet], time_horizon:float, time_step:float, 
         set_up_plot(lines, x, y, z, planets)
 
     total_time = 0  # in years
+    iteration = 0
     while total_time <= time_horizon:
 
-        print("Time (in y): ", total_time, " --- Number of planets: ", len(planets))
-
-        for p in planets:
-            p.report()
         append_positions(x, y, z, planets)
         
-        if make_plot:
+        if make_plot and iteration % plot_update_freq == 0:
             update_plot(lines, x, y, z, planets, total_time)
 
         compute_accelerations(planets)
@@ -56,5 +54,6 @@ def planet_dynamics(planets: list[Planet], time_horizon:float, time_step:float, 
         # planets = check_for_colliding_planets(planets)
 
         total_time += time_step * DAYS_TO_YEARS  # in years
+        iteration += 1
     
     return x, y, z
