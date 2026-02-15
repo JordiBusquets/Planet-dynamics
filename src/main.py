@@ -73,4 +73,4 @@ def planet_dynamics(horizon, step, make_plot=True):
 
 
 if __name__ == '__main__':
-    planet_dynamics(TIME_HORIZON, TIME_DELTA)
+    planet_dynamics(horizon=TIME_HORIZON, step=TIME_DELTA, make_plot=False)
