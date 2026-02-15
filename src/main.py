@@ -7,9 +7,6 @@ from src.visualization.plots import set_up_plot, update_plot
 import matplotlib.pyplot as plt
 
 # Simulation parameters
-TIME_HORIZON = 5.0  # in years
-TIME_DELTA = 0.5    # in days
-DAYS_TO_SEC = 24.0 * 60.0 * 60.0
 DAYS_TO_YEARS = 1.0 / 365.25
 DAYS_TO_SECONDS = 24.0 * 60.0 * 60.0
 
@@ -27,7 +24,7 @@ def planet_dynamics(planets: list[Planet], time_horizon: float, time_step: float
     Returns:
         Tuple of (x, y, z) position lists for all planets
     """
-    delta_in_sec = time_step * DAYS_TO_SEC
+    delta_in_sec = time_step * DAYS_TO_SECONDS
 
     x, y, z = [[]], [[]], [[]]
     set_up_positions(x, y, z, len(planets))
@@ -47,8 +44,8 @@ def planet_dynamics(planets: list[Planet], time_horizon: float, time_step: float
 
         compute_accelerations(planets)
         for p in planets:
-            p.update_velocity(delta_in_sec)
-            p.update_position(delta_in_sec)
+            p.update_velocity(delta_t=delta_in_sec)
+            p.update_position(delta_t=delta_in_sec)
             p.report()
         
 
