@@ -49,6 +49,8 @@ def planet_dynamics(planets: list[Planet], time_horizon: float, time_step: float
         for p in planets:
             p.update_velocity(delta_in_sec)
             p.update_position(delta_in_sec)
+            p.report()
+        
 
         # Uncomment to enable collision detection
         # planets = check_for_colliding_planets(planets)

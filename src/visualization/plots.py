@@ -69,7 +69,6 @@ def set_up_plot(lines: list, x: list[list[float]], y: list[list[float]], z: list
 
 def update_plot(lines: list, x: list[list[float]], y: list[list[float]], z: list[list[float]], planets: list[Planet], t: float) -> None:
     """Update the plot with new planet positions."""
-    n = len(lines)
     i = 0
     while i < len(planets):
         lines[i].set_xdata(x[i])

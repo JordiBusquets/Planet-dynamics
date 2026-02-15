@@ -11,9 +11,9 @@ def gravitational_force(p1: Planet, p2: Planet) -> float:
     return f
 
 
-def gravitational_acceleration(f: float, p: Planet) -> float:
+def gravitational_acceleration(force: float, p: Planet) -> float:
     """Calculate the gravitational acceleration from a force."""
-    return (f / p.mass) ** 0.5
+    return (force / p.mass) ** 0.5
 
 
 def compute_accelerations(planets: List[Planet]) -> None:
