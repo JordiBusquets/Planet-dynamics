@@ -32,12 +32,6 @@ def planet_dynamics(planets: list[Planet], time_horizon:float, time_step:float, 
     """
     delta_in_sec = time_step * DAYS_TO_SEC
 
-    # Define planets for simulation
-    planets = [
-        static_sun("1"),
-        Planet("2", R_sun, M_earth, D_earth_sun, 0.0, 0.0, 0.0, V_earth, 0.0)
-    ]
-
     x, y, z = [[]], [[]], [[]]
     set_up_positions(x, y, z, len(planets))
     lines = []
