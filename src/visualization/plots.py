@@ -3,11 +3,12 @@ import time
 import matplotlib.pyplot as plt
 from IPython.display import display
 from src.constants import R_earth
+from src.models.planet import Planet
 
 colors = ['g-', 'r-', 'b-', 'y-', 'g-', 'b-']
 
 
-def compute_limit(planets, dim, current_lim_min=0.0, current_lim_plus=0.0):
+def compute_limit(planets: list[Planet], dim: int, current_lim_min: float = 0.0, current_lim_plus: float = 0.0) -> tuple[float, float]:
     """Compute axis limits based on planet positions."""
     n = len(planets)
     i = 0
@@ -34,7 +35,7 @@ def compute_limit(planets, dim, current_lim_min=0.0, current_lim_plus=0.0):
     return (min(lim_min, -R_earth), max(lim_plus, R_earth))
 
 
-def set_up_plot(lines, x, y, z, planets):
+def set_up_plot(lines: list, x: list[list[float]], y: list[list[float]], z: list[list[float]], planets: list[Planet]) -> None:
     """Initialize the 3D plot for planet trajectories."""
     n = len(planets)
     lim_x_min, lim_x_plus = compute_limit(planets, 1)
@@ -66,7 +67,7 @@ def set_up_plot(lines, x, y, z, planets):
     set_up_plot.display_handle = display(fig, display_id=True)
 
 
-def update_plot(lines, x, y, z, planets, t):
+def update_plot(lines: list, x: list[list[float]], y: list[list[float]], z: list[list[float]], planets: list[Planet], t: float) -> None:
     """Update the plot with new planet positions."""
     n = len(lines)
     i = 0

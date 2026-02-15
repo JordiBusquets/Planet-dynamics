@@ -4,19 +4,19 @@ from src.constants import G
 from src.models.planet import Planet, distance_between_planets, static_earth
 
 
-def gravitational_force(p1, p2) -> float:
+def gravitational_force(p1: Planet, p2: Planet) -> float:
     """Calculate the gravitational force between two planets."""
     d = distance_between_planets(p1, p2)
     f = G * p1.mass * p2.mass / (d * d)
     return f
 
 
-def gravitational_acceleration(f, p) -> float:
+def gravitational_acceleration(f: float, p: Planet) -> float:
     """Calculate the gravitational acceleration from a force."""
     return (f / p.mass) ** 0.5
 
 
-def compute_accelerations(planets: List[Planet]):
+def compute_accelerations(planets: List[Planet]) -> None:
     """Compute gravitational accelerations for all planets due to mutual forces."""
     n = len(planets)
 
@@ -44,4 +44,3 @@ def compute_accelerations(planets: List[Planet]):
             planets[i_rhs].append_acceleration(-a_rhs * d_x / d, -a_rhs * d_y / d, -a_rhs * d_z / d)
             i_rhs += 1
         i_lhs += 1
-    return 0

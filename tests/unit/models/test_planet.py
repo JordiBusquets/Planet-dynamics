@@ -22,26 +22,26 @@ class TestPlanetClass(unittest.TestCase):
             x_a=0.1, y_a=0.2, z_a=0.3
         )
 
-    def test_planet_initialization(self):
+    def test_planet_initialization(self) -> None:
         """Test planet initializes with correct attributes."""
         self.assertEqual(self.planet.name, "TestPlanet")
         self.assertEqual(self.planet.radius, 1000.0)
         self.assertEqual(self.planet.mass, 1e24)
         self.assertEqual(self.planet.x, 0.0)
 
-    def test_volume_calculation(self):
+    def test_volume_calculation(self) -> None:
         """Test volume calculation."""
         volume = self.planet.volume()
         expected_volume = (4.0 / 3.0) * math.pi * (1000.0 ** 3.0)
         self.assertAlmostEqual(volume, expected_volume)
 
-    def test_density_calculation(self):
+    def test_density_calculation(self) -> None:
         """Test density calculation."""
         density = self.planet.density()
         expected_density = self.planet.mass / self.planet.volume()
         self.assertAlmostEqual(density, expected_density)
 
-    def test_update_position(self):
+    def test_update_position(self) -> None:
         """Test position update."""
         delta_t = 1.0
         self.planet.update_position(delta_t)
@@ -53,7 +53,7 @@ class TestPlanetClass(unittest.TestCase):
         # z = 0 + 3.0 * 1.0 = 3.0
         self.assertAlmostEqual(self.planet.z, 3.0)
 
-    def test_update_velocity(self):
+    def test_update_velocity(self) -> None:
         """Test velocity update."""
         delta_t = 2.0
         self.planet.update_velocity(delta_t)
@@ -65,14 +65,14 @@ class TestPlanetClass(unittest.TestCase):
         # z_v = 3.0 + 0.3 * 2.0 = 3.6
         self.assertAlmostEqual(self.planet.z_v, 3.6)
 
-    def test_clear_acceleration(self):
+    def test_clear_acceleration(self) -> None:
         """Test acceleration clearing."""
         self.planet.clear_acceleration()
         self.assertEqual(self.planet.x_a, 0.0)
         self.assertEqual(self.planet.y_a, 0.0)
         self.assertEqual(self.planet.z_a, 0.0)
 
-    def test_append_acceleration(self):
+    def test_append_acceleration(self) -> None:
         """Test appending acceleration."""
         self.planet.clear_acceleration()
         self.planet.append_acceleration(0.5, 1.0, 1.5)
@@ -91,7 +91,7 @@ class TestPlanetClass(unittest.TestCase):
 class TestPlanetFunctions(unittest.TestCase):
     """Test planet-related functions."""
 
-    def test_set_up_positions(self):
+    def test_set_up_positions(self) -> None:
         """Test position list initialization."""
         x, y, z = [], [], []
         set_up_positions(x, y, z, 3)

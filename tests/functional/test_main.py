@@ -20,7 +20,7 @@ def planets() -> list[Planet]:
 @patch('src.main.set_up_plot')
 @patch('src.main.update_plot')
 @patch('src.main.plt.show')
-def test_planet_dynamics_without_plot(mock_show, mock_update, mock_setup, planets):
+def test_planet_dynamics_without_plot(mock_show, mock_update, mock_setup, planets: list[Planet]) -> None:
     """Test planet_dynamics runs without plotting."""
     x, y, z = planet_dynamics(planets=planets, time_horizon=0.1, time_step=0.01, make_plot=False)
     
@@ -34,7 +34,7 @@ def test_planet_dynamics_without_plot(mock_show, mock_update, mock_setup, planet
 
 
 @patch('src.main.plt.show')
-def test_planet_dynamics_returns_positions(mock_show, planets):
+def test_planet_dynamics_returns_positions(mock_show, planets: list[Planet]) -> None:
     """Test planet_dynamics returns position arrays."""
     x, y, z = planet_dynamics(planets=planets, time_horizon=0.01, time_step=0.01, make_plot=False)
     

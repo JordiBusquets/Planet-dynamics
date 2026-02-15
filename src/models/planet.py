@@ -9,12 +9,12 @@ class Planet(object):
     """Represents a celestial body with position, velocity, and acceleration."""
     
     def __init__(self,
-                 name,
-                 radius=1.0,
-                 mass=1.0,
-                 x=0., y=0., z=0.,
-                 x_v=0., y_v=0., z_v=0.,
-                 x_a=0., y_a=0., z_a=0.):
+                 name: str,
+                 radius: float = 1.0,
+                 mass: float = 1.0,
+                 x: float = 0., y: float = 0., z: float = 0.,
+                 x_v: float = 0., y_v: float = 0., z_v: float = 0.,
+                 x_a: float = 0., y_a: float = 0., z_a: float = 0.) -> None:
         self.name = name
         self.radius = radius
         self.mass = mass
@@ -36,13 +36,13 @@ class Planet(object):
         """Calculate the density of the planet."""
         return self.mass / self.volume()
 
-    def update_position(self, delta_t):
+    def update_position(self, delta_t: float) -> None:
         """Update position based on velocity and time step."""
         self.x += self.x_v * delta_t
         self.y += self.y_v * delta_t
         self.z += self.z_v * delta_t
 
-    def update_velocity(self, delta_t):
+    def update_velocity(self, delta_t: float) -> None:
         """Update velocity based on acceleration and time step."""
         self.x_v += self.x_a * delta_t
         self.y_v += self.y_a * delta_t
@@ -54,13 +54,13 @@ class Planet(object):
         self.y_a = 0.0
         self.z_a = 0.0
 
-    def append_acceleration(self, dx_a, dy_a, dz_a):
+    def append_acceleration(self, dx_a: float, dy_a: float, dz_a: float) -> None:
         """Add acceleration components."""
         self.x_a += dx_a
         self.y_a += dy_a
         self.z_a += dz_a
 
-    def report(self):
+    def report(self) -> None:
         """Print current state of the planet."""
         print("Planet", self.name, ", mass %.2f, radius %.2f" % (self.mass, self.radius), ":")
         print("    * position:     ( %.2f, %.2f, %.2f)" % (self.x, self.y, self.z))
@@ -68,7 +68,7 @@ class Planet(object):
         print("    * acceleration: ( %.2f, %.2f, %.2f)" % (self.x_a, self.y_a, self.z_a))
 
 
-def set_up_positions(x, y, z, n):
+def set_up_positions(x: list[list[float]], y: list[list[float]], z: list[list[float]], n: int) -> None:
     """Initialize position tracking lists."""
     i = 0
     while i < n:
@@ -78,7 +78,7 @@ def set_up_positions(x, y, z, n):
         i += 1
 
 
-def append_positions(x, y, z, planets):
+def append_positions(x: list[list[float]], y: list[list[float]], z: list[list[float]], planets: List[Planet]) -> None:
     """Record current positions of all planets."""
     n = len(planets)
     i = 0
@@ -90,14 +90,14 @@ def append_positions(x, y, z, planets):
         i += 1
 
 
-def distance_between_planets(p_lhs, p_rhs) -> float:
+def distance_between_planets(p_lhs: Planet, p_rhs: Planet) -> float:
     """Calculate the Euclidean distance between two planets."""
     return math.sqrt((p_lhs.x - p_rhs.x) ** 2.0 +
                      (p_lhs.y - p_rhs.y) ** 2.0 +
                      (p_lhs.z - p_rhs.z) ** 2.0)
 
 
-def combine_planets(p_lhs, p_rhs) -> 'Planet':
+def combine_planets(p_lhs: Planet, p_rhs: Planet) -> Planet:
     """Combine two planets into a new planet (collision)."""
     # new name
     new_name = p_lhs.name + p_rhs.name
@@ -133,7 +133,7 @@ def combine_planets(p_lhs, p_rhs) -> 'Planet':
                   new_x_a, new_y_a, new_z_a)
 
 
-def create_new_planet_list(i_lhs, i_rhs, new_planet, old_list):
+def create_new_planet_list(i_lhs: int, i_rhs: int, new_planet: Planet, old_list: List[Planet]) -> List[Planet]:
     """Create a new planet list after a collision."""
     new_list = old_list
     if i_lhs < i_rhs:
@@ -166,12 +166,12 @@ def check_for_colliding_planets(planets: List['Planet']) -> List['Planet']:
     return planets
 
 
-def ran():
+def ran() -> float:
     """Generate a random number between -1 and 1."""
     return -1.0 + 2.0 * np.random.random()
 
 
-def random_sun(name):
+def random_sun(name: str) -> Planet:
     """Create a sun with random position and velocity."""
     return Planet(name,
                   R_sun,  # radius
@@ -180,7 +180,7 @@ def random_sun(name):
                   ran() * V_earth, ran() * V_earth, ran() * V_earth)  # velocity
 
 
-def static_sun(name):
+def static_sun(name: str) -> Planet:
     """Create a sun at the origin."""
     return Planet(name,
                   R_sun,  # radius
@@ -189,7 +189,7 @@ def static_sun(name):
                   0.0, 0.0, 0.0)  # velocity
 
 
-def real_earth(name):
+def real_earth(name: str) -> Planet:
     """Create a realistic Earth planet, at the current Sun-Earth distance,
     with realistic current tangential velocity."""
     return Planet(name, 
@@ -199,7 +199,7 @@ def real_earth(name):
                   0.0, V_earth, 0.0) # velocity
 
 
-def random_earth(name):
+def random_earth(name: str) -> Planet:
     """Create an earth with random position and velocity."""
     return Planet(name,
                   R_earth,  # radius
@@ -208,7 +208,7 @@ def random_earth(name):
                   ran() * V_earth, ran() * V_earth, ran() * V_earth)  # velocity
 
 
-def static_earth(name):
+def static_earth(name: str) -> Planet:
     """Create an earth at the origin."""
     return Planet(name,
                   R_earth,  # radius

@@ -9,7 +9,7 @@ from src.constants import G, M_sun, M_earth
 class TestGravitationalForce(unittest.TestCase):
     """Test gravitational force calculation."""
 
-    def test_gravitational_force_positive(self):
+    def test_gravitational_force_positive(self) -> None:
         """Test gravitational force is positive."""
         p1 = Planet("P1", mass=1e24)
         p2 = Planet("P2", mass=1e24, x=1e10, y=0.0, z=0.0)
@@ -17,7 +17,7 @@ class TestGravitationalForce(unittest.TestCase):
         force = gravitational_force(p1, p2)
         self.assertGreater(force, 0)
 
-    def test_gravitational_force_symmetry(self):
+    def test_gravitational_force_symmetry(self) -> None:
         """Test Newton's third law: F12 = F21."""
         p1 = Planet("P1", mass=1e24, x=0.0, y=0.0, z=0.0)
         p2 = Planet("P2", mass=2e24, x=1e10, y=0.0, z=0.0)
@@ -27,7 +27,7 @@ class TestGravitationalForce(unittest.TestCase):
         
         self.assertAlmostEqual(force_12, force_21)
 
-    def test_gravitational_force_inverse_square(self):
+    def test_gravitational_force_inverse_square(self) -> None:
         """Test that force follows inverse square law."""
         p1 = Planet("P1", mass=1e24)
         
@@ -43,7 +43,7 @@ class TestGravitationalForce(unittest.TestCase):
         ratio = force_near / force_far
         self.assertAlmostEqual(ratio, 4.0, places=5)
 
-    def test_gravitational_force_formula(self):
+    def test_gravitational_force_formula(self) -> None:
         """Test against known gravitational force formula."""
         m1, m2 = 1e24, 1e24
         d = 1e10
@@ -60,7 +60,7 @@ class TestGravitationalForce(unittest.TestCase):
 class TestGravitationalAcceleration(unittest.TestCase):
     """Test gravitational acceleration calculation."""
 
-    def test_acceleration_positive(self):
+    def test_acceleration_positive(self) -> None:
         """Test acceleration is positive."""
         force = 1e20
         planet = Planet("P", mass=1e24)
@@ -68,7 +68,7 @@ class TestGravitationalAcceleration(unittest.TestCase):
         acceleration = gravitational_acceleration(force, planet)
         self.assertGreater(acceleration, 0)
 
-    def test_acceleration_formula(self):
+    def test_acceleration_formula(self) -> None:
         """Test acceleration calculation."""
         force = 1e20
         mass = 1e24
@@ -83,7 +83,7 @@ class TestGravitationalAcceleration(unittest.TestCase):
 class TestComputeAccelerations(unittest.TestCase):
     """Test acceleration computation for planet systems."""
 
-    def test_single_planet_no_acceleration(self):
+    def test_single_planet_no_acceleration(self) -> None:
         """Test single planet has no acceleration (no other bodies)."""
         planet = Planet("P", x=0.0, y=0.0, z=0.0)
         planets = [planet]
@@ -94,7 +94,7 @@ class TestComputeAccelerations(unittest.TestCase):
         self.assertEqual(planet.y_a, 0.0)
         self.assertEqual(planet.z_a, 0.0)
 
-    def test_two_planets_acceleration_nonzero(self):
+    def test_two_planets_acceleration_nonzero(self) -> None:
         """Test two planets experience acceleration."""
         p1 = Planet("P1", mass=1e24, x=0.0, y=0.0, z=0.0)
         p2 = Planet("P2", mass=1e24, x=1e10, y=0.0, z=0.0)

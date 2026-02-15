@@ -13,7 +13,7 @@ DAYS_TO_SEC = 24.0 * 60.0 * 60.0
 DAYS_TO_YEARS = 1.0 / 365.25
 DAYS_TO_SECONDS = 24.0 * 60.0 * 60.0
 
-def planet_dynamics(planets: list[Planet], time_horizon:float, time_step:float, make_plot: bool=True, plot_update_freq: int=10):
+def planet_dynamics(planets: list[Planet], time_horizon: float, time_step: float, make_plot: bool = True, plot_update_freq: int = 10) -> tuple[list[list[float]], list[list[float]], list[list[float]]]:
     """
     Simulate planet dynamics over a given time horizon.
     
