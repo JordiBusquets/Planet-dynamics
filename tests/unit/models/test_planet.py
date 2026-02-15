@@ -1,7 +1,7 @@
 """Unit tests for Planet class and model functions."""
 import unittest
 import math
-from src.models import (
+from src.models.planet import (
     Planet, set_up_positions, append_positions, distance_between_planets,
     combine_planets, static_sun, static_earth, random_sun, random_earth
 )

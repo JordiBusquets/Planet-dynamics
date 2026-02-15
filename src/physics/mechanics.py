@@ -1,7 +1,7 @@
 """Physics calculations for planet dynamics."""
 from typing import List
 from src.constants import G
-from src.models import Planet, distance_between_planets, static_earth
+from src.models.planet import Planet, distance_between_planets, static_earth
 
 
 def gravitational_force(p1, p2) -> float:
@@ -45,13 +45,3 @@ def compute_accelerations(planets: List[Planet]):
             i_rhs += 1
         i_lhs += 1
     return 0
-
-
-def stable_circular_orbit_earth(p, x) -> 'Planet':
-    """Calculate velocity for a stable circular orbit."""
-    earth = static_earth("earth")
-    earth.x = x
-    f = gravitational_force(p, earth)
-    a = gravitational_acceleration(f, earth)
-    earth.y_v = (a * x) ** 0.5
-    return earth

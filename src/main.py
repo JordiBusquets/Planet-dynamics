@@ -1,12 +1,8 @@
 """Main entry point for planet dynamics simulation."""
 
-from .models import (
-    Planet, set_up_positions, append_positions,
-    check_for_colliding_planets, static_sun, static_earth
-)
-from .physics import compute_accelerations
-from .visualization import set_up_plot, update_plot
-from .constants import D_earth_sun, V_earth, M_earth, R_sun
+from src.models.planet import Planet, set_up_positions, append_positions
+from src.physics.mechanics import compute_accelerations
+from src.visualization.plots import set_up_plot, update_plot
 
 import matplotlib.pyplot as plt
 

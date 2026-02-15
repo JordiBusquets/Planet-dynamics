@@ -82,8 +82,8 @@ x, y, z = planet_dynamics(horizon=100.0, step=1.0, make_plot=False)
 ### Creating Custom Planetary Systems
 
 ```python
-from src.models import Planet, static_sun, static_earth
-from src.physics import compute_accelerations
+from src.models.planet import Planet, static_sun, static_earth
+from src.physics.mechanics import compute_accelerations
 from src.constants import D_earth_sun, V_earth, M_earth, R_sun
 
 # Define planets with custom properties

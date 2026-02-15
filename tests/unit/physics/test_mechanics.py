@@ -1,11 +1,8 @@
 """Unit tests for physics mechanics module."""
 import unittest
-import math
-from src.physics import (
-    compute_accelerations, gravitational_force, gravitational_acceleration,
-    stable_circular_orbit_earth
-)
-from src.models import Planet, static_sun, static_earth
+from src.physics.mechanics import compute_accelerations, gravitational_force, gravitational_acceleration
+
+from src.models.planet import Planet, static_sun, static_earth
 from src.constants import G, M_sun, M_earth
 
 
@@ -130,28 +127,3 @@ class TestComputeAccelerations(unittest.TestCase):
         # For equal masses, accelerations should be opposite
         # a1 = -a2 in x direction
         self.assertAlmostEqual(p1.x_a, -p2.x_a, places=5)
-
-
-class TestStableCircularOrbitEarth(unittest.TestCase):
-    """Test stable orbital velocity calculation."""
-
-    def test_returns_planet(self):
-        """Test function returns a planet."""
-        sun = static_sun("Sun")
-        result = stable_circular_orbit_earth(sun, 1e11)
-        
-        self.assertIsInstance(result, Planet)
-        self.assertEqual(result.name, "earth")
-
-    def test_earth_at_specified_distance(self):
-        """Test earth is placed at specified distance."""
-        sun = static_sun("Sun")
-        distance = 1.5e11
-        
-        earth = stable_circular_orbit_earth(sun, distance)
-        
-        self.assertEqual(earth.x, distance)
-
-
-if __name__ == '__main__':
-    unittest.main()
