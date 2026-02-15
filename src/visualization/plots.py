@@ -1,7 +1,7 @@
 """Visualization tools for planet dynamics simulation."""
 import time
 import matplotlib.pyplot as plt
-from .constants import R_earth
+from src.constants import R_earth
 
 colors = ['g-', 'r-', 'b-', 'y-', 'g-', 'b-']
 

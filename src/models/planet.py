@@ -1,7 +1,7 @@
 """Planet model for dynamics simulation."""
 import math
 from typing import List
-from .constants import R_earth, R_sun, M_earth, M_sun, D_earth_sun, V_earth
+from src.constants import R_earth, R_sun, M_earth, M_sun, D_earth_sun, V_earth
 import numpy as np
 
 
