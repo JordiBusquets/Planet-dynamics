@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 DAYS_TO_YEARS = 1.0 / 365.25
 DAYS_TO_SECONDS = 24.0 * 60.0 * 60.0
 
-def planet_dynamics(planets: list[Planet], time_horizon: float, time_step: float, make_plot: bool = True, plot_update_freq: int = 10) -> tuple[list[list[float]], list[list[float]], list[list[float]]]:
+def planet_dynamics(planets: list[Planet], time_horizon: float, time_step: float, make_plot: bool = True, plot_update_freq: int = 10):
     """
     Simulate planet dynamics over a given time horizon.
     
@@ -53,5 +53,3 @@ def planet_dynamics(planets: list[Planet], time_horizon: float, time_step: float
 
         total_time += time_step * DAYS_TO_YEARS  # in years
         iteration += 1
-    
-    return x, y, z
