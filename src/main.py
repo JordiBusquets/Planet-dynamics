@@ -7,10 +7,10 @@ from src.plots import set_up_plot, update_plot
 import matplotlib.pyplot as plt
 
 # Simulation parameters
-DAYS_TO_YEARS = 1.0 / 365.25
+DAYS_IN_YEAR = 365.25
 DAYS_TO_SECONDS = 24.0 * 60.0 * 60.0
 
-def planet_dynamics(planets: list[Planet], time_horizon: float, time_step: float, make_plot: bool = True, plot_update_freq: int = 10):
+def planet_dynamics(planets: list[Planet], time_horizon: float, time_step: float, make_plot: bool = True, plot_update_freq: int = 10) -> tuple[list[list[float]], list[list[float]], list[list[float]]]:
     """
     Simulate planet dynamics over a given time horizon.
     
@@ -26,7 +26,9 @@ def planet_dynamics(planets: list[Planet], time_horizon: float, time_step: float
     """
     delta_in_sec = time_step * DAYS_TO_SECONDS
 
-    x, y, z = [[]], [[]], [[]]
+    x:list[list[float]] = []
+    y:list[list[float]] = []
+    z:list[list[float]] = []
     set_up_positions(x, y, z, len(planets))
     lines = []
     
@@ -51,5 +53,7 @@ def planet_dynamics(planets: list[Planet], time_horizon: float, time_step: float
         # Uncomment to enable collision detection
         # planets = check_for_colliding_planets(planets)
 
-        total_time += time_step * DAYS_TO_YEARS  # in years
+        total_time += time_step / DAYS_IN_YEAR  # in years
         iteration += 1
+
+    return x, y, z
