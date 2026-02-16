@@ -60,13 +60,6 @@ class Planet(object):
         self.y_a += dy_a
         self.z_a += dz_a
 
-    def report(self) -> None:
-        """Print current state of the planet."""
-        print("Planet", self.name, ", mass %.2f, radius %.2f" % (self.mass, self.radius), ":")
-        print("    * position:     ( %.2f, %.2f, %.2f)" % (self.x, self.y, self.z))
-        print("    * velocity:     ( %.2f, %.2f, %.2f)" % (self.x_v, self.y_v, self.z_v))
-        print("    * acceleration: ( %.2f, %.2f, %.2f)" % (self.x_a, self.y_a, self.z_a))
-
 
 def set_up_positions(x: list[list[float]], y: list[list[float]], z: list[list[float]], n: int) -> None:
     """Initialize position tracking lists."""
@@ -164,6 +157,16 @@ def check_for_colliding_planets(planets: List['Planet']) -> List['Planet']:
             i_rhs += 1
         i_lhs += 1
     return planets
+
+
+def report(planets: Planet, iteration: int, years: float) -> None:
+    """Print current state of the planet."""
+    print("After iteration ", iteration, " (", "%.6f" % years, " years):")
+    for p in planets:
+        print("   Planet ", p.name, ":")
+        print("      * position:     ( %.2f, %.2f, %.2f)" % (p.x, p.y, p.z))
+        print("      * velocity:     ( %.3f, %.3f, %.3f)" % (p.x_v, p.y_v, p.z_v))
+        print("      * acceleration: ( %.4f, %.4f, %.4f)" % (p.x_a, p.y_a, p.z_a))
 
 
 def ran() -> float:

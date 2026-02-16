@@ -1,6 +1,6 @@
 """Main entry point for planet dynamics simulation."""
 
-from src.planet import Planet, set_up_positions, append_positions
+from src.planet import Planet, set_up_positions, append_positions, report
 from src.physics import compute_accelerations
 from src.plots import set_up_plot, update_plot
 
@@ -30,8 +30,9 @@ def planet_dynamics(planets: list[Planet], time_horizon: float, time_step: float
     y:list[list[float]] = []
     z:list[list[float]] = []
     set_up_positions(x, y, z, len(planets))
-    lines = []
+    append_positions(x, y, z, planets)
     
+    lines = []
     if make_plot:
         set_up_plot(lines, x, y, z, planets)
 
@@ -39,17 +40,17 @@ def planet_dynamics(planets: list[Planet], time_horizon: float, time_step: float
     iteration = 0
     while total_time <= time_horizon:
 
-        append_positions(x, y, z, planets)
-        
         if make_plot and iteration % plot_update_freq == 0:
             update_plot(lines, x, y, z, planets, total_time)
 
         compute_accelerations(planets)
+        report(planets=planets, iteration=iteration, years=total_time) # report current position, velocity and acceleration
         for p in planets:
             p.update_velocity(delta_t=delta_in_sec)
             p.update_position(delta_t=delta_in_sec)
-            p.report()
         
+        append_positions(x, y, z, planets)
+    
         # Uncomment to enable collision detection
         # planets = check_for_colliding_planets(planets)
 
