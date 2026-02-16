@@ -35,12 +35,6 @@ class TestPlanetClass(unittest.TestCase):
         expected_volume = (4.0 / 3.0) * math.pi * (1000.0 ** 3.0)
         self.assertAlmostEqual(volume, expected_volume)
 
-    def test_density_calculation(self) -> None:
-        """Test density calculation."""
-        density = self.planet.density()
-        expected_density = self.planet.mass / self.planet.volume()
-        self.assertAlmostEqual(density, expected_density)
-
     def test_update_position(self) -> None:
         """Test position update."""
         delta_t = 1.0
@@ -72,17 +66,17 @@ class TestPlanetClass(unittest.TestCase):
         self.assertEqual(self.planet.y_a, 0.0)
         self.assertEqual(self.planet.z_a, 0.0)
 
-    def test_append_acceleration(self) -> None:
+    def test_update_acceleration(self) -> None:
         """Test appending acceleration."""
         self.planet.clear_acceleration()
-        self.planet.append_acceleration(0.5, 1.0, 1.5)
+        self.planet.update_acceleration(0.5, 1.0, 1.5)
         
         self.assertAlmostEqual(self.planet.x_a, 0.5)
         self.assertAlmostEqual(self.planet.y_a, 1.0)
         self.assertAlmostEqual(self.planet.z_a, 1.5)
         
         # Append again
-        self.planet.append_acceleration(0.5, 1.0, 1.5)
+        self.planet.update_acceleration(0.5, 1.0, 1.5)
         self.assertAlmostEqual(self.planet.x_a, 1.0)
         self.assertAlmostEqual(self.planet.y_a, 2.0)
         self.assertAlmostEqual(self.planet.z_a, 3.0)

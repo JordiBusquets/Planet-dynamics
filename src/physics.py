@@ -1,4 +1,5 @@
 """Physics calculations for planet dynamics."""
+import math
 from typing import List
 from src.constants import G
 from src.planet import Planet, distance_between_planets, static_earth
@@ -7,13 +8,13 @@ from src.planet import Planet, distance_between_planets, static_earth
 def gravitational_force(p1: Planet, p2: Planet) -> float:
     """Calculate the gravitational force between two planets."""
     d = distance_between_planets(p1, p2)
-    f = G * p1.mass * p2.mass / (d * d)
+    f = G * p1.mass * p2.mass / (d ** 2)
     return f
 
 
 def gravitational_acceleration(force: float, p: Planet) -> float:
     """Calculate the gravitational acceleration from a force."""
-    return (force / p.mass) ** 0.5
+    return math.sqrt(force / p.mass)
 
 
 def compute_accelerations(planets: List[Planet]) -> None:
@@ -40,7 +41,7 @@ def compute_accelerations(planets: List[Planet]) -> None:
             d_x = p_rhs.x - p_lhs.x
             d_y = p_rhs.y - p_lhs.y
             d_z = p_rhs.z - p_lhs.z
-            planets[i_lhs].append_acceleration(a_lhs * d_x / d, a_lhs * d_y / d, a_lhs * d_z / d)
-            planets[i_rhs].append_acceleration(-a_rhs * d_x / d, -a_rhs * d_y / d, -a_rhs * d_z / d)
+            planets[i_lhs].update_acceleration(a_lhs * d_x / d, a_lhs * d_y / d, a_lhs * d_z / d)
+            planets[i_rhs].update_acceleration(-a_rhs * d_x / d, -a_rhs * d_y / d, -a_rhs * d_z / d)
             i_rhs += 1
         i_lhs += 1

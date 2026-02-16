@@ -32,10 +32,6 @@ class Planet(object):
         """Calculate the volume of the planet."""
         return (4.0 / 3.0) * math.pi * (self.radius ** 3.0)
 
-    def density(self) -> float:
-        """Calculate the density of the planet."""
-        return self.mass / self.volume()
-
     def update_position(self, delta_t: float) -> None:
         """Update position based on velocity and time step."""
         self.x += self.x_v * delta_t
@@ -54,7 +50,7 @@ class Planet(object):
         self.y_a = 0.0
         self.z_a = 0.0
 
-    def append_acceleration(self, dx_a: float, dy_a: float, dz_a: float) -> None:
+    def update_acceleration(self, dx_a: float, dy_a: float, dz_a: float) -> None:
         """Add acceleration components."""
         self.x_a += dx_a
         self.y_a += dy_a

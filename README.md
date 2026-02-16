@@ -16,12 +16,12 @@ A Python-based N-body gravitational dynamics simulator that models the orbital m
 The simulator uses Newtonian mechanics to model gravitational interactions:
 
 ### Gravitational Force
-$$F = G \frac{m_1 m_2}{r^2}$$
+$$F = G \frac{m_1 m_2}{d^2}$$
 
 Where:
 - $G = 6.674 \times 10^{-11}$ m³/(kg·s²) (gravitational constant)
 - $m_1$, $m_2$ are the masses of two bodies
-- $r$ is the distance between them
+- $d$ is the distance between them
 
 ### Particle Integration
 Positions and velocities are updated using forward Euler integration:
