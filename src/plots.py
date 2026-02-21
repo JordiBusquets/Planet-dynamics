@@ -5,7 +5,7 @@ from IPython.display import display
 from src.constants import R_earth
 from src.planet import Planet
 
-colors = ['g-', 'r-', 'b-', 'y-', 'g-', 'b-']
+colors = ['g-', 'r-', 'b-', 'y-'] * 20
 
 
 def compute_limit(planets: list[Planet], dim: int, current_lim_min: float = 0.0, current_lim_plus: float = 0.0) -> tuple[float, float]:
